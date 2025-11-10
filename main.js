@@ -1,10 +1,9 @@
 const button = document.querySelector(".check");
 let score = 20;
+let highscore = 0;
 
-const secretNumber = Math.trunc(Math.random() * 20) + 1;
+let secretNumber = Math.trunc(Math.random() * 20) + 1;
 console.log(secretNumber);
-
-document.querySelector(".number").textContent = secretNumber;
 
 // to add click functionality to the check button
 button.addEventListener("click", function () {
@@ -18,9 +17,17 @@ button.addEventListener("click", function () {
   } else if (guess === secretNumber) {
     //when player wins game
     document.querySelector(".message").textContent = "Correct Number 🎉";
+    document.querySelector(".number").textContent = secretNumber;
 
     //   to change background color when player wins
     document.querySelector("body").style.backgroundColor = "#60b347";
+    document.querySelector(".number").style.width = "30rem";
+
+    // to implement highscore functionality
+    if (score > highscore) {
+      highscore = score;
+      document.querySelector(".highscore").textContent = highscore;
+    }
 
     // when players guess is higher
   } else if (guess > secretNumber) {
@@ -50,4 +57,22 @@ button.addEventListener("click", function () {
   }
 });
 
-// to make the score functionality work
+// to reset the game with again button
+const againBtn = document.querySelector(".again");
+
+againBtn.addEventListener("click", function () {
+  score = 20;
+
+  console.log("hello world");
+  document.querySelector(".number").textContent = "?";
+  document.querySelector(".score").textContent = score;
+  document.querySelector(".message").textContent = "Start guessing...";
+  // document.querySelector(".highscore").textContent = 0;
+  document.querySelector("body").style.backgroundColor = "#222";
+  document.querySelector(".guess").value = "";
+  secretNumber = Math.trunc(Math.random() * 20) + 1;
+  console.log(secretNumber);
+  document.querySelector(".number").style.width = "15rem";
+});
+
+// to set highscore
